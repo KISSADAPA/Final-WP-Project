@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from User.models import Staff, Customer
+from Manage.models import Product
+
 # Create your models here.
 
 #----- คำสั่งซื้อ -----
