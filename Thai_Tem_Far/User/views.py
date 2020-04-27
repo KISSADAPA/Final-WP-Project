@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 # Create your views here.
+def register_page(request):
+    return render(request, 'User/register.html')
+
 def login_page(request):
     
     context = {}

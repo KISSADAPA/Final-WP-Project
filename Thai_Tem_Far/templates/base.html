@@ -26,12 +26,46 @@
                 src: url("{% static 'Prompt/Prompt-Regular.ttf' %}");
         }
 
-        body {
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+            width:100%; 
+            overflow:hidden;
+            user-select: none;
             font-family: 'Prompt', sans-serif;
             padding-bottom: 3rem;
             color: #5a5a5a;
         }
-
+        #full-size{
+            height:100%;
+            width:100%;
+            position: fixed;
+            left: 0%;
+            right: 0%;
+        }
+        #left-screen{
+            width: 50%;
+            height: 100%;
+            position: fixed;
+            left: 0%;
+        }
+        #right-screen{
+            width: 50%;
+            height: 100%;
+            position: fixed;
+            right: 0%;
+        }
+        #title{
+            margin: 40px;
+            font-size: 40px;
+        }
+        #center-size{
+            width: 80%;
+            text-align: center;
+            margin: auto;
+            text-align-last: center;
+        }
 
         /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -154,11 +188,14 @@
                 </ul>
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Log Out</button>
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Sign Out</button>
                     </a>
                 {% else %}
                     <a href="{% url 'login' %}">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Log In</button>
+                        <button class="btn btn-outline-light my-2 my-sm-0 mx-1" type="submit">Sign In</button>
+                    </a>
+                    <a href="{% url 'register' %}">
+                        <button class="btn btn-outline-light my-2 my-sm-0 mx-1" type="submit">Sign Up</button>
                     </a>
                 {% endif %}
             </div>
