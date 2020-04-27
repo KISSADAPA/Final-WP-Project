@@ -11,8 +11,6 @@ class Customer(models.Model):
     cus_email = models.EmailField(max_length=254, null=False)
     cus_phone = models.CharField(max_length=10)
     cus_address = models.TextField()
-    username = models.CharField(max_length=150, null=False, unique=True)
-    password = models.CharField(max_length=128, null=False)
 
 #----- ข้อมูลพนักงาน(ทั้งหมด) -----
 class Staff(models.Model):

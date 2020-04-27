@@ -1,5 +1,3 @@
-from operator import index
-
 from django.shortcuts import redirect, render
 
 
