@@ -1,14 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from User.models import Staff, Customer
+from Account.models import Staff, Customer
 from Manage.models import Product
 
 # Create your models here.
 
 #----- คำสั่งซื้อ -----
 class Order(models.Model):
-    order_id = models.CharField(max_length=255, primary_key=True, null=False, unique=True)
     order_amount = models.IntegerField()
     order_date = models.DateField(auto_now=True, null=False)
     total_price = models.FloatField()
@@ -17,7 +16,6 @@ class Order(models.Model):
 
 #----- รายละเอียดคำสั่งซื้อ -----
 class Order_list(models.Model):
-    item_no = models.IntegerField(primary_key=True, null=False, unique=True)
     unit = models.IntegerField()
     unit_price = models.FloatField()
     item_price = models.FloatField()
@@ -26,7 +24,6 @@ class Order_list(models.Model):
 
 #----- ใบเสร็จ -----
 class Bill(models.Model):
-    bill_id = models.CharField(max_length=255)
     bill_date = models.DateField(auto_now=True)
     tex_id = models.CharField(max_length=255)
     total_price = models.FloatField()

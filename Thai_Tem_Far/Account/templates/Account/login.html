@@ -15,7 +15,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Password" style="width: 95%;" required  value="{{ password }}">
             </div>
             <button type="submit" class="btn btn-dark" style="margin-top: 10px; position: absolute; left: 60px; width: 120px;">ยืนยัน</button>
-           <a href="{% url 'change_pass' %}" style="margin-top: 18px; position: absolute; left: 220px;">Forgot Password?</a>
+            <a href="{% url 'change_pass' %}" style="margin-top: 18px; position: absolute; left: 220px;">Forgot Password?</a>
             {% if error %}
                 <label for="error" style="font-size: 20px; margin-top:15px; margin-left: 400px;">{{ error }}</label>
             {% endif %}

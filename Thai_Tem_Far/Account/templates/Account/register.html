@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="full-size">
+    <form name="register_form" method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+        <label class="text-dark" for="register" id="title">สมัครสมาชิก</label>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px;" for="first_name">ชื่อจริง</label>
+            <input type="text" name="first_name" class="form-control" placeholder="Firstname" style="width: 95%;" required value="{{ first_name }}">
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="last_name">นามสกุล</label>
+            <input type="text" name="last_name" class="form-control" placeholder="Lastname" style="width: 95%;" required value="{{ last_name }}">
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="username">ชื่อผู้ใช้</label>
+            <input type="text" name="username" class="form-control" placeholder="Username" style="width: 95%;" required value="{{ username }}">
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="password">รหัสผ่าน</label>
+            <input type="text" name="password" class="form-control" placeholder="Password" style="width: 95%;" required value="{{ password }}">
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="con_pass">ยืนยัน รหัสผ่าน</label>
+            <input type="text" name="con_pass" class="form-control" placeholder="Confirm Password" style="width: 95%;" required>
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="email">Email</label>
+            <input type="text" name="email" class="form-control" placeholder="Email" style="width: 95%;" required value="{{ email }}">
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="phone">เบอร์โทรศัพท์</label>
+            <input type="text" name="phone" class="form-control" placeholder="Phone" style="width: 95%;" required value="{{ phone }}">
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+            <label style="font-size: 20px" for="address">ที่อยู่</label>
+            <textarea type="text" name="address"  class="form-control" placeholder="Address" rows="15" style="width: 95%; resize: none;" required>{{ address }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 60px; position: absolute; left: 60px; width: 120px;">ยืนยัน</button>
+        {% if error %}
+                <label for="error" style="font-size: 20px; margin-top:15px; margin-left: 400px;">{{ error }}</label>
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}
