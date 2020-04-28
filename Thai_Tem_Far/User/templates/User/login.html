@@ -5,7 +5,7 @@
     <div id="full-size">
         <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
-            <label class="text-dark" for="register" id="title">Log In</label>
+            <label class="text-dark" for="login" id="title">Log In</label>
             <div class="form-group" style="margin-left: 60px;">
                 <label style="font-size: 20px;" for="username">ชื่อผู้ใช้</label>
                 <input type="text" name="username" class="form-control" placeholder="Username" style="width: 95%;" required value="{{ username }}">
@@ -14,9 +14,10 @@
                 <label style="font-size: 20px" for="password">รหัสผ่าน</label>
                 <input type="password" name="password" class="form-control" placeholder="Password" style="width: 95%;" required  value="{{ password }}">
             </div>
-            <button type="submit" class="btn btn-dark" style="margin-top: 10px; position: absolute; left: 60px; width: 10%;">ยืนยัน</button>
+            <button type="submit" class="btn btn-dark" style="margin-top: 10px; position: absolute; left: 60px; width: 120px;">ยืนยัน</button>
+           <a href="{% url 'change_pass' %}" style="margin-top: 18px; position: absolute; left: 220px;">Forgot Password?</a>
             {% if error %}
-                <label for="error" style="font-size: 20px; margin-top:15px; margin-left: 20%;">{{ error }}</label>
+                <label for="error" style="font-size: 20px; margin-top:15px; margin-left: 400px;">{{ error }}</label>
             {% endif %}
             <input type="hidden" name="next_url" value="{{ next_url }}">
         </form>

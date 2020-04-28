@@ -38,3 +38,6 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return redirect('index')
+
+def change_pass(request):
+    return render(request, 'User/change_pass.html')
