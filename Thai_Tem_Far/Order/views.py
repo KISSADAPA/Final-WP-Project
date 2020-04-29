@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 from datetime import datetime
 
@@ -8,9 +9,6 @@ from Manage.models import Product, Promo
 from Order.models import Buy
 
 # Create your views here.
-def index(request):
-    return render(request, 'Order/index.html')
-
 @login_required
 def cart_page(request):
     return render(request, 'Order/cart.html')
@@ -143,6 +141,48 @@ def reservation_list(request):
     Buys = Buy.objects.filter(customer_id__id__contains=user_id).order_by("-id")
     context['Buys'] = Buys
     return render(request, 'Order/status.html', context=context)
+
+def index(request):
+
+    context = {}
+    products = {}
+    
+    if request.method == 'POST':
+        select = request.POST.get('selection')
+        keyword = request.POST.get('keyword')
+        context['keyword'] = keyword
+        context['selection'] = select
+        if request.user.is_superuser == True or request.user.is_staff == True:
+            if select == 'year':
+                products = Product.objects.filter(years=keyword)
+            elif select == 'data':
+                products = Product.objects.filter(data__icontains=keyword)
+            elif select == 'name':
+                products = Product.objects.filter(name__icontains=keyword)
+            else:
+                products = Product.objects.filter(  Q(years__contains=keyword) |
+                                            Q(data__contains=keyword) |
+                                            Q(name__icontains=keyword))
+        else:
+            if select == 'year':
+                products = Product.objects.filter(years=keyword).exclude(status='HIDE')
+            elif select == 'data':
+                products = Product.objects.filter(data__icontains=keyword).exclude(status='HIDE')
+            elif select == 'name':
+                products = Product.objects.filter(name__icontains=keyword).exclude(status='HIDE')
+            else:
+                products = Product.objects.filter(  Q(years__contains=keyword) |
+                                            Q(data__contains=keyword) |
+                                            Q(name__icontains=keyword))
+    else:
+        if request.user.is_superuser == True or request.user.is_staff == True:
+            products = Product.objects.all()
+        else:
+            products = Product.objects.all().exclude(status='HIDE')
+    context['products'] = products
+
+
+    return render(request,'Order/index.html',context=context)
 
 @login_required
 def add_edit_product(request):
