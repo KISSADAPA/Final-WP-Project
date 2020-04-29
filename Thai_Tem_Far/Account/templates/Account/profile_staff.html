@@ -4,31 +4,31 @@
 
     <div id="full-size">
         <div>
-            <label class="text-dark" for="profile" id="title">Profile</label>
+            <label class="text-dark" for="profile_staff" id="title">Profile Staff</label>
 
-            <a href="{% url 'edit_profile' %}">
+            <a href="{% url 'edit_profile_staff' %}">
                 <button type="submit" class="btn btn-outline-dark float-right" style = "margin: 50px;">Edit Profile</button>
             </a>
         </div>
 
         <div>
             <p style="margin-left: 60px; font-size: 20px;">
-                ชื่อจริง : {{ customer.cus_fname }}
+                ชื่อจริง : {{ staff.sta_fname }}
             </p>
             <p style="margin-left: 60px; font-size: 20px;">
-                นามสกุล : {{ customer.cus_lname }}
+                นามสกุล : {{ staff.sta_lname }}
             </p>
             <p style="margin-left: 60px; font-size: 20px;">
-                Email : {{ customer.cus_email }}
+                Email : {{ staff.sta_email }}
             </p>
             <p style="margin-left: 60px; font-size: 20px;">
                 ชื่อผู้ใช้ : {{ user.username }}
             </p>
             <p style="margin-left: 60px; font-size: 20px;">
-                เบอร์โทรศัพท์ : {{ customer.cus_phone }}
+                เบอร์โทรศัพท์ : {{ staff.sta_phone }}
             </p>
             <p style="margin-left: 60px; font-size: 20px;">
-                ที่อยู่ : {{ customer.cus_address }}
+                ตำแหน่ง : {{ staff.sta_position }}
             </p>
         </div>
     </div>

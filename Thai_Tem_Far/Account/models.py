@@ -13,9 +13,10 @@ class Customer(models.Model):
     account = models.ForeignKey(User, on_delete=models.PROTECT)
 
 #----- ข้อมูลพนักงาน(ทั้งหมด) -----
-class Staff(models.Model):
+class Staff(models.Model):    
     sta_fname = models.CharField(max_length=50, null=False)
     sta_lname = models.CharField(max_length=50, null=False)
-    sta_posistion = models.CharField(max_length=50, null=False)
+    sta_email = models.EmailField(max_length=254, null=False, unique=True)
+    sta_phone = models.CharField(max_length=10)
+    sta_position = models.CharField(max_length=50, null=False)
     account = models.ForeignKey(User, on_delete=models.PROTECT)
-    

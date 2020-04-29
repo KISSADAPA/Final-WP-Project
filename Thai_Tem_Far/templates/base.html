@@ -157,11 +157,7 @@
             </button>
 
             <div class="navbar-collapse collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">...</a>
-                    </li>
-                </ul>
+                <ul class="navbar-nav mr-auto"></ul>
 
                 <a class="nav-link" href="{% url 'cart' %}">
                     <img src="{% static 'base_component/cart.png'%}" width="25" height="25" class="d-inline-block align-top">
@@ -174,14 +170,14 @@
                     </button>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-
-                        {% if perms.Manages %}
+                        {% if perms.Account.view_staff %}
+                            <a class="dropdown-item" href="{% url 'profile_staff' %}">Profile</a>
                             <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
                             <a class="dropdown-item" href="{% url 'product' %}">Product</a>
                         {% endif %}
 
-                        {% if perms.Order %}
+                        {% if perms.Account.view_customer %}
+                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                             <a class="dropdown-item" href="{% url 'status' %}">Status</a>
                         {% endif %}
 

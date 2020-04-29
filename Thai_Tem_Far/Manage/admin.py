@@ -2,11 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from Manage.models import Producer, Stock, Product, Promo
-
-admin.site.register(Producer)
-
-admin.site.register(Stock)
+from Manage.models import  Product, Promo
 
 admin.site.register(Product)
 

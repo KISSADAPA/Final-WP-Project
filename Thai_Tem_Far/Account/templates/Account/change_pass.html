@@ -2,27 +2,27 @@
 
 {% block content %}
 
-<div id="full-size">
-    <form name="register_form" method="POST" action="{% url 'change_pass' %}">
-    {% csrf_token %}
-        <label class="text-dark" for="register" id="title">เปลี่ยนรหัสผ่าน</label>
-        <div class="form-group" style="margin-left: 60px;">
-            <label style="font-size: 20px" for="username">ชื่อผู้ใช้</label>
-            <input type="text" name="username" class="form-control" placeholder="Username" style="width: 95%;" required value="{{ username }}">
-        </div>
-        <div class="form-group" style="margin-left: 60px;">
-            <label style="font-size: 20px" for="password">รหัสผ่าน</label>
-            <input type="text" name="password" class="form-control" placeholder="Password" style="width: 95%;" required value="{{ password }}">
-        </div>
-        <div class="form-group" style="margin-left: 60px;">
-            <label style="font-size: 20px" for="con_pass">ยืนยัน รหัสผ่าน</label>
-            <input type="text" name="con_pass" class="form-control" placeholder="Confirm Password" style="width: 95%;" required>
-        </div>
-        <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 60px; position: absolute; left: 60px; width: 120px;">ยืนยัน</button>
-        {% if error %}
-                <label for="error" style="font-size: 20px; margin-top:15px; margin-left: 400px;">{{ error }}</label>
-        {% endif %}
-    </form>
-</div>
+    <div id="full-size">
+        <form name="register_form" method="POST" action="{% url 'change_pass' %}">
+        {% csrf_token %}
+            <label class="text-dark" for="register" id="title">เปลี่ยนรหัสผ่าน</label>
+            <div class="form-group" style="margin-left: 60px;">
+                <label style="font-size: 20px" for="username">ชื่อผู้ใช้</label>
+                <input type="text" name="username" class="form-control" placeholder="Username" style="width: 95%;" required value="{{ username }}">
+            </div>
+            <div class="form-group" style="margin-left: 60px;">
+                <label style="font-size: 20px" for="password">รหัสผ่าน</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" style="width: 95%;" required value="{{ password }}">
+            </div>
+            <div class="form-group" style="margin-left: 60px;">
+                <label style="font-size: 20px" for="con_pass">ยืนยัน รหัสผ่าน</label>
+                <input type="password" name="con_pass" class="form-control" placeholder="Confirm Password" style="width: 95%;" required>
+            </div>
+            <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 60px; position: absolute; left: 60px; width: 120px;">ยืนยัน</button>
+            {% if error %}
+                    <label for="error" style="font-size: 20px; margin-top:15px; margin-left: 400px;">{{ error }}</label>
+            {% endif %}
+        </form>
+    </div>
 
 {% endblock %}
