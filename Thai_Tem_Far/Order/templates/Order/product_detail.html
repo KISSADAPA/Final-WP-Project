@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+                <img src="/media/{{ product.pic_url }}" alt="Responsive image" style="width: 100%;" class="mt-5">
+                <a type="button" class="btn btn-success btn-sm" style='margin: 111px;' href="{% url 'product_dashboard' %}">กลับไปหน้ารายการสินค้า</a>
+        </div>
+        <div class="col-6">
+            <table class="table table-borderless mt-4">
+                <tbody>
+                    <tr>
+                        <td colspan="2"><h1>{{product.name }}</h1></td>
+
+                    </tr>
+                    <tr>
+                        <td>ปีที่ผลิต</td>
+                        <td>{{product.years}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>รายละเอียด</td>
+                        <td>{{product.data}}</td>
+                    </tr>
+                    <tr>
+                        <td>ประเภท</td>
+                        <td>{{ product.get_type_display }}</td>
+                    </tr>
+                    <tr>
+                        <td>หมวด</td>
+                        <td>{{ product.get_category_display}}</td>
+                    </tr>
+                    <tr>
+                        <td>ราคา</td>
+                        <td>{{ product.price}}</td>
+                    </tr>
+                    <tr>
+                        <td>วันที่เเก้ไขล่าสุด</td>
+                        <td>{{ product.update_time}}</td>
+                    </tr>
+                </tbody>
+              </table>
+              
+              
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
