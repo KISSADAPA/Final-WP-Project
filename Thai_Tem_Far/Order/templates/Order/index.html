@@ -99,7 +99,7 @@
                             <div class="card-body">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.name }}
-                                        {% if perms.manageproduct.change_product %}
+                                        {% if perms.Manage %}
                                         <span {% if product.status == 'AVAILABLE' %} class="badge badge-success"
                                             {% elif  product.status == 'NO_AVAILABLE' %} class="badge badge-danger"
                                             {% elif  product.status == 'HIDE' %} class="badge badge-warning" {% endif %}
@@ -116,7 +116,7 @@
                                             style="margin: 4px;">{{ product.price }} บาท</button>
                                     </div>
                                     <br>
-                                    {% if perms.manageproduct.change_product %}
+                                    {% if perms.Manage %}
                                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                         <a type="button" class="btn btn-success btn-sm" data-toggle="modal"
                                             data-target="#exampleModalCenter{{product.id}}" style="margin: 4px;">

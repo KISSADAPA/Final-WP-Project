@@ -38,7 +38,6 @@ class Buy(models.Model):
         ('Returned','คืนสินค้าเเล้ว'),
         ('Pending','รอการยืนยัน')
     )
-
     create_time = models.DateField(auto_now_add=True)
     update_time = models.DateField(auto_now=True)
     status = models.CharField(max_length=8, choices=STATUS)

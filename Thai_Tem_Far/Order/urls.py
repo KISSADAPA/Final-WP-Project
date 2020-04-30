@@ -13,6 +13,4 @@ urlpatterns = [
     path('admin/Manage/product/add/', views.add_edit_product, name='add_edit_product'),
     path('admin/Manage/product/<int:id_product>/change/', views.change_product, name='change_product'),
     path('product_detail/<int:id_product>', views.product_detail, name='product_detail'),
-
-    path('add_pro', views.add_pro, name='add_pro')
 ]
