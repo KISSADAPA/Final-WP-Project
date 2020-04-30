@@ -159,10 +159,6 @@
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto"></ul>
 
-                <a class="nav-link" href="{% url 'cart' %}">
-                    <img src="{% static 'base_component/cart.png'%}" width="25" height="25" class="d-inline-block align-top">
-                </a>
-
                 {% if user.is_authenticated %}
                 <div class="dropdown show">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

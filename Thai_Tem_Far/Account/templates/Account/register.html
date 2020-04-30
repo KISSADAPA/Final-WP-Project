@@ -3,9 +3,9 @@
 {% block content %}
 
     <div id="full-size">
+        <label class="text-dark" for="register" id="title">สมัครสมาชิก</label>
         <form name="register_form" method="POST" action="{% url 'register' %}">
         {% csrf_token %}
-            <label class="text-dark" for="register" id="title">สมัครสมาชิก</label>
             <div class="form-group" style="margin-left: 60px;">
                 <label style="font-size: 20px;" for="first_name">ชื่อจริง</label>
                 <input type="text" name="first_name" class="form-control" placeholder="Firstname" style="width: 95%;" required value="{{ first_name }}">

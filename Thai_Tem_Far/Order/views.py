@@ -8,10 +8,9 @@ from datetime import datetime
 from Manage.models import Product, Promo
 from Order.models import Buy
 
+from Order.forms import add_product
+
 # Create your views here.
-@login_required
-def cart_page(request):
-    return render(request, 'Order/cart.html')
 
 @login_required
 def booking(request, id_product):
@@ -181,7 +180,6 @@ def index(request):
             products = Product.objects.all().exclude(status='HIDE')
     context['products'] = products
 
-
     return render(request,'Order/index.html',context=context)
 
 @login_required
@@ -203,3 +201,7 @@ def handler404(request, exception, template_name="404.html"):
     response = render_to_response(template_name)
     response.status_code = 404
     return response
+
+def add_pro(request):
+    form = add_product()
+    return render(request, 'Order/add_pro.html', {'form':form})

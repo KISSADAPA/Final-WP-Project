@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <label class="text-dark" for="register" id="title">เพิ่มสินค้า</label>
+        <form name="register_form" method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+            <table>
+                {{ form }}
+            </table>
+        </form>
+{% endblock %}

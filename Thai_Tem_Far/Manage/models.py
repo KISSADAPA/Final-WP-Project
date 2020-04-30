@@ -39,7 +39,7 @@ class Product(models.Model):
     type = models.CharField(max_length=10, choices=TYPE)
     status = models.CharField(max_length=12, choices=STATUS)
     price = models.FloatField()
-    picture = models.ImageField(upload_to='images/')
+    pic_url = models.ImageField(upload_to='images/')
     create_time = models.DateField(auto_now_add=True)
     update_time = models.DateField(auto_now=True)
 
