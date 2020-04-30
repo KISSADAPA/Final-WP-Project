@@ -2,4 +2,189 @@
 
 {% block content %}
 
+    <div id="full-size">
+        <label class="text-dark" for="cart" id="title">Cart</label>
+
+        <form name="register_form" method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        <div class="table-responsive" style="width: 90%; margin-left: auto; margin-right: auto;">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>สินค้า</th>
+                                <th>จำนวน</th>
+                                <th>ราคาต่อชิ้น</th>
+                                <th>ราคารวม</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for buy in Buys%}
+                            <tr>
+                                <td>{{buy.id}}</td>
+                                <td>{{buy.product_id.name}} {{buy.product_id.data}}</td>
+                                <td><button
+                                    {% if buy.product_id.status == 'AVAILABLE' %}
+                                    class="btn btn-success btn-sm"
+                                    {% elif  buy.product_id.status == 'NO_AVAILABLE' %}
+                                    class="btn btn-danger btn-sm"
+                                    {% elif  buy.product_id.status == 'HIDE' %}
+                                    class="btn btn-warning btn-sm"
+                                    {% endif %}
+                                    disabled>{{buy.product_id.get_status_display}}</button></td>
+                                <td>
+                                    <button type="button" {% if buy.status == 'Pending' %}
+                                        class="btn btn-warning btn-sm" {% elif  buy.status == 'Approved' %}
+                                        class="btn btn-success btn-sm" {% elif  buy.status == 'Picked' %}
+                                        class="btn btn-info btn-sm" {% elif  buy.status == 'Returned' %}
+                                        class="btn btn-secondary btn-sm" {% elif  buy.status == 'Denied' %}
+                                        class="btn btn-danger btn-sm" {% endif %} disabled>{{buy.status}}</button>
+                                </td>
+
+                                <td>฿{{buy.total_price}}</td>
+                                <td></td>
+                                <td>
+                                    <div class="btn-group btn-group-sm " role="group" aria-label="...">
+                                        <a href="{% url 'buy_approve' id_buy=buy.id %}">
+                                            <button type="button" class="btn btn-success btn-sm mr-2"
+                                                id="{{buy.id}}">Approve</button>
+                                        </a>
+                                        <a href="{% url 'buy_deniel' id_buy=buy.id %}">
+                                            <button type="button" class="btn btn-danger btn-sm mr-2"
+                                                id="{{buy.id}}">Deny</button>
+                                        </a>
+
+                                        <a type="button" class="btn btn-info  btn-sm mr-2" data-toggle="modal"
+                                            data-target="#exampleModalCenter{{buy.id}}">
+                                            details
+                                        </a>
+                                        
+
+                                        <div class="modal fade" id="exampleModalCenter{{buy.id}}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">การสั่งซื้อเลขที่
+                                                            {{ buy.id }} : {{ buy.create_time}} <span
+                                                                {% if buy.status == 'Pending' %}
+                                                                class="badge badge-warning"
+                                                                {% elif  buy.status == 'Approved' %}
+                                                                class="badge badge-success"
+                                                                {% elif  buy.status == 'Picked' %}
+                                                                class="badge badge-info"
+                                                                {% elif  buy.status == 'Returned' %}
+                                                                class="badge badge-secondary"
+                                                                {% elif  buy.status == 'Denied' %}
+                                                                class="badge badge-danger" {% endif %}
+                                                                disabled>{{buy.get_status_display}}</span></h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="modal-body">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <img src="/media/{{ buy.product_id.pic_url }}"
+                                                                            alt="" srcset="" style="max-width:100%;">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <table class="table table-borderless">
+
+                                                                            <tr>
+                                                                                <td>ข้อมูลผู้ซื้อ</td>
+                                                                                <td>{{ buy.customer_id.first_name }}
+                                                                                    {{ buy.customer_id.last_name }}
+                                                                                </td>
+
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>เริ่มต้น</td>
+                                                                                <td>{{ buy.start_date }}</td>
+
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>วันที่สิ้นสุด</td>
+                                                                                <td>{{buy.end_date }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>ราคารวม</td>
+                                                                                <td>฿{{buy.total_price }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>ข้อมูลสินค้า</td>
+                                                                                <td>{{ buy.product_id.name }}({{buy.product_id.years}})
+                                                                                    รายละเอียด {{buy.product_id.data}}
+                                                                                    {{ buy.product_id.get_type_display }}
+                                                                                    ประเภท
+                                                                                    {{ buy.product_id.get_category_display}}
+                                                                                </td>
+                    
+                                                                        
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>สถานะสินค้า</td>
+                                                                                <td>
+                                                                                    <span
+                                                                                        {% if buy.product_id.status == 'AVAILABLE' %}
+                                                                                        class="badge badge-success"
+                                                                                        {% elif  buy.product_id.status == 'NO_AVAILABLE' %}
+                                                                                        class="badge badge-danger"
+                                                                                        {% elif  buy.product_id.status == 'HIDE' %}
+                                                                                        class="badge badge-warning"
+                                                                                        {% endif %}
+                                                                                        disabled>{{buy.product_id.get_status_display}}</span>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        {% if buy.product_id.status == 'AVAILABLE' %}
+                                                        <a href='{% url "notavailable" id_buy=buy.id %}'
+                                                            type="button" class="btn btn-danger">Mark as Not
+                                                            Available</a>
+                                                        {% else %}
+                                                        <a href='{% url "available" id_buy=buy.id %}'
+                                                            type="button" class="btn btn-success">Mark as Available</a>
+                                                        {% endif %}
+                                                        <a href='{% url "confirm" id_buy=buy.id %}' type="button"
+                                                            class="btn btn-info">More Details</a>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 60px; position: absolute; left: 200px; width: 150px;">ยืนยันการสั่งซื้อ</button>
+        </form>
+        <a>
+            <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 60px; position: absolute; left: 60px; width: 120px;">ซื้อสินค้าต่อ</button>
+        </a>
+    </div>
+
 {% endblock %}
