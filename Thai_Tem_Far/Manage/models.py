@@ -2,6 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+#----- ข้อมูลู้ผลิต -----
+class Producer(models.Model):
+    producer_name = models.CharField(max_length=255)
+    producer_address = models.TextField()
+    producer_phone = models.CharField(max_length=10)
+
+#----- ข้อมูลสินค้า -----
+class Stock(models.Model):
+    stock_number = models.IntegerField()
+    order_amount = models.IntegerField()
+    location = models.TextField()
     
 #----- ข้อมูลสินค้า -----
 class Product(models.Model):
@@ -32,14 +44,15 @@ class Product(models.Model):
     )
 
     product_name = models.CharField(max_length=255)
-    producer_name = models.CharField(max_length=255)
+    price = models.FloatField()
+    pic_url = models.ImageField(upload_to='images/')
+    producer_id = models.ForeignKey(Producer, on_delete=models.DO_NOTHING)
+    stock_id = models.ForeignKey(Stock, on_delete=models.CASCADE)
     years = models.CharField(max_length=4)
-    data = models.TextField()
+    information = models.TextField()
     category = models.CharField(max_length=3, choices=CATEGORY_PRODUCT)
     type = models.CharField(max_length=10, choices=TYPE)
     status = models.CharField(max_length=12, choices=STATUS)
-    price = models.FloatField()
-    pic_url = models.ImageField(upload_to='images/')
     create_time = models.DateField(auto_now_add=True)
     update_time = models.DateField(auto_now=True)
 
